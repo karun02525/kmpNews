@@ -72,6 +72,9 @@ kotlin {
 
             api(libs.koin.core)
             implementation(libs.koin.compose)
+            implementation(libs.koin.composeVM)
+            implementation(libs.lifecycle.viewmodel.compose)
+
 
             implementation(libs.voyager.navigator)
             implementation(libs.voyager.screen.model)
@@ -84,6 +87,8 @@ kotlin {
              implementation(libs.ktor.client.core)
              implementation(libs.ktor.client.content.negotiation)
              implementation(libs.ktor.serialization.kotlinx.json)
+            implementation(libs.ktor.logging)
+
 
              implementation(libs.kotlinx.datetime)
 
@@ -92,6 +97,8 @@ kotlin {
         desktopMain.dependencies {
             implementation(compose.desktop.currentOs)
             implementation(libs.kotlinx.coroutines.swing)
+            implementation(libs.ktor.client.okhttp)
+
         }
     }
 }

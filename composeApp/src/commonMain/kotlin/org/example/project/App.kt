@@ -11,6 +11,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import cafe.adriel.voyager.navigator.Navigator
+import cafe.adriel.voyager.transitions.SlideTransition
 import coil3.ImageLoader
 import coil3.PlatformContext
 import coil3.annotation.ExperimentalCoilApi
@@ -27,18 +28,27 @@ import kmprestapi.composeapp.generated.resources.Res
 import kmprestapi.composeapp.generated.resources.compose_multiplatform
 import okio.FileSystem
 import org.example.project.presentation.HomePage
+import org.example.project.presentation.home.CustomNavigation
+import org.example.project.presentation.home.HomeScreen
 
 @OptIn(ExperimentalCoilApi::class)
 @Composable
 @Preview
 fun App() {
     MaterialTheme {
+
+
         setSingletonImageLoaderFactory {
             context ->
             readAsyncImage(context)
         }
 
-        Navigator(HomePage())
+        CustomNavigation()
+
+
+      /*   Navigator(HomePage()){
+            SlideTransition(it)
+        }*/
     }
 }
 

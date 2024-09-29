@@ -5,18 +5,25 @@ import io.ktor.client.call.body
 import io.ktor.client.plugins.DefaultRequest
 import io.ktor.client.plugins.HttpTimeout
 import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
+import io.ktor.client.plugins.logging.Logging
 import io.ktor.client.request.get
 import io.ktor.client.request.parameter
 import io.ktor.client.request.url
-import io.ktor.http.headers
+import io.ktor.http.URLProtocol
+import io.ktor.http.path
 import io.ktor.serialization.kotlinx.json.json
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flow
 import kotlinx.serialization.json.Json
 import org.example.project.domain.model.Articles
 import org.example.project.domain.model.MainResponseApiNews
+import org.example.project.domain.model.MealItem
+import org.example.project.domain.model.Meals
 import org.example.project.domain.remote.NewsApiService
 import org.example.project.domain.remote.RequestCondition
+import org.example.project.utils.K
+import org.example.project.utils.Response
 
 class NewsApiServiceImpl : NewsApiService {
 
@@ -31,6 +38,9 @@ class NewsApiServiceImpl : NewsApiService {
 // publishedAt&apiKey=0573b33ff1fa47d6afab4af997188a75
 
     private val httpClient = HttpClient {
+
+        install(Logging)
+
         install(ContentNegotiation) {
             json(Json {
                 prettyPrint = true
@@ -77,5 +87,41 @@ class NewsApiServiceImpl : NewsApiService {
                 emit(RequestCondition.ErrorCondition(e.message.toString()))
             }
         }
+    }
+
+
+
+    override fun fetchMeals(location: String): Flow<Response<Meals>> {
+       return flow {
+           emit(Response.Loading())
+           val mealDto = httpClient.get{
+               url {
+                   protocol = URLProtocol.HTTPS
+                   host = K.Host
+                   path(K.Path)
+                   parameters.append("a",location)
+               }
+           }.body<Meals>()
+           emit(Response.Success(mealDto))
+       }.catch {
+           emit(Response.Error(it))
+       }
+    }
+
+    override fun fetchMealById(id: String): Flow<Response<MealItem>> {
+       return  flow {
+           emit(Response.Loading())
+           val mealDto = httpClient.get{
+               url {
+                   protocol = URLProtocol.HTTPS
+                   host = K.Host
+                   path(K.LookUpPath)
+                   parameters.append("i",id)
+               }
+           }.body<MealItem>()
+           emit(Response.Success(mealDto))
+       }.catch {
+           emit(Response.Error(it))
+       }
     }
 }

@@ -30,8 +30,8 @@ voyager = "1.0.0"
 koin = "3.4.3"
 koin-compose = "1.0.4"
 koinComposeMultiplatform = "3.6.0-alpha3"
-
-
+lifecycleViewmodelCompose = "2.8.0"
+koinMultiplatform="1.2.0-Beta4"
 
 
 [libraries]
@@ -49,6 +49,9 @@ androidx-lifecycle-viewmodel = { group = "org.jetbrains.androidx.lifecycle", nam
 androidx-lifecycle-runtime-compose = { group = "org.jetbrains.androidx.lifecycle", name = "lifecycle-runtime-compose", version.ref = "androidx-lifecycle" }
 kotlinx-coroutines-swing = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-swing", version.ref = "kotlinx-coroutines" }
 
+
+
+lifecycle-viewmodel-compose = { module = "org.jetbrains.androidx.lifecycle:lifecycle-viewmodel-compose", version.ref = "androidx-lifecycle" }
 mongodb-realm = { module = "io.realm.kotlin: library-base", version.ref = "realm" }
 kotlin-coroutines = {module="org.jetbrains.kotlinx: kotlinx-coroutines-core", version.ref="coroutines" }
 stately-common = {module = "co.touchlab: stately-common", version.ref = "statelyCommon" }
@@ -68,10 +71,12 @@ voyager-koin = { module = "cafe.adriel.voyager: voyager-koin", version.ref = "vo
 koin-android = { module = "io.insert-koin:koin-android", version.ref = "koin" }
 koin-core = { module = "io.insert-koin:koin-core", version.ref = "koin" }
 koin-compose = { module = "io.insert-koin:koin-compose", version.ref = "koin-compose"}
+koin-composeVM = { module = "io.insert-koin:koin-compose-viewmodel", version.ref = "koinMultiplatform" }
 
 
 ktor-client-content-negotiation = { module = "io.ktor:ktor-client-content-negotiation", version.ref="ktor" }
 ktor-serialization-kotlinx-json = { module = "io.ktor:ktor-serialization-kotlinx-json", version.ref="ktor" }
+ktor-logging = { module = "io.ktor:ktor-client-logging", version.ref = "ktor"}
 ktor-client-core = { module = "io.ktor:ktor-client-core", version.ref= "ktor" }
 ktor-client-darwin = { module = "io.ktor:ktor-client-darwin", version.ref="ktor" }
 ktor-client-android = { module = "io.ktor:ktor-client-android", version.ref="ktor" }
